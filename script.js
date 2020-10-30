@@ -1,4 +1,4 @@
-const $colors = document.getElementById('colors')
+const $colors = $('#colors')
 const html = []
 
 for (const color in colors) {
@@ -10,16 +10,14 @@ for (const color in colors) {
               style="background-color: ${color}">${color}</div>`)
 }
 
-$colors.innerHTML = html.join('')
+$colors.append(html.join(''))
 
-$colors.addEventListener('click', function (e) {
-  if (e.target.classList.contains('color')) {
-    if (e.target.dataset.display === 'name') {
-      e.target.dataset.display = 'code'
-      e.target.textContent = e.target.dataset.code
-    } else {
-      e.target.dataset.display = 'name'
-      e.target.textContent = e.target.dataset.name
-    }
+$colors.on('click', '.color', function () {
+  if ($(this).data('display') === 'name') {
+    $(this).data('display', 'code')
+    $(this).text($(this).data('code'))
+  } else {
+    $(this).data('display', 'name')
+    $(this).text($(this).data('name'))
   }
 })
